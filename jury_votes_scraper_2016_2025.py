@@ -88,7 +88,7 @@ for year in range(2016, 2026):
 	print(f"Processing year: {year}")
 
 	if year == 2020:
-		print(f"The Eurovision Song Contest could not be held in {2020} due to Covid.")
+		print(f"The Eurovision Song Contest could not be held in {year} due to Covid.")
 		continue
 
 	final_res, column_names = fetch_jury_voting_table(year)
