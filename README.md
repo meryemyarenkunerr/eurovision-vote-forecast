@@ -30,7 +30,7 @@ eurovision-jury-predictor/
 │
 │── data/ # Yearly CSV files (jury_votes_2016.csv, ...)
 │── src/ # Python scripts for scraping & modeling
-│	 ├── scrape.py # Wikipedia scraper using BeautifulSoup
+│	 ├── jury_votes_scraper_2016_2025.py # Wikipedia scraper using BeautifulSoup
 │	 └── model.py # (Planned) ML model for prediction
 │
 │── notebooks/ # Jupyter notebooks for exploration
