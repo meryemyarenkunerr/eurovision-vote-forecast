@@ -16,11 +16,15 @@ def fetch_jury_voting_table(year):
 			- column_names: List of column headers including 'Contestant' and 'Year'.
 	"""
 
-	url = "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_" + str(year)
-	data = requests.get(url).text
-	soup = BeautifulSoup(data, 'html.parser')
+	headers = {
+		"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+	}
 
-	tables = soup.find_all('table', class_='wikitable plainrowheaders')
+	url = "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_" + str(year)
+	data = requests.get(url, headers= headers)
+	soup = BeautifulSoup(data.text, 'html.parser')
+
+	tables = tables = soup.select("table.wikitable")
 	final_results = None
 
 	# Look for the table specifically labeled as "jury voting results of the final"
@@ -98,7 +102,7 @@ for year in range(2016, 2026):
 	if final_res:
 		data = get_data(final_res, year)
 		df = pd.DataFrame(data, columns= column_names)
-		df.to_csv(os.path.join(data_dir, f"jury_votes_{year}.csv"), index= False)
-		print(f"Saved data/jury_votes_{year}.csv")
+		df.to_excel(os.path.join(data_dir, f"jury_votes_{year}.xlsx"), index= False)
+		print(f"Saved data/jury_votes_{year}.xlsx")
 	else:
-		print("No jury data found for {year}.")
+		print(f"No jury data found for {year}.")
