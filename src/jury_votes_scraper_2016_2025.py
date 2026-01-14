@@ -86,7 +86,7 @@ def get_data(final_result, year):
 
 # Ensure "data/" folder exists
 project_root = os.path.dirname(os.path.dirname(__file__))
-data_dir = os.path.join(project_root, "data")
+data_dir = os.path.join(project_root, "data/raw")
 os.makedirs(data_dir, exist_ok= True)
 
 # Loop over multiple years and save as CSV
@@ -103,6 +103,6 @@ for year in range(2016, 2026):
 		data = get_data(final_res, year)
 		df = pd.DataFrame(data, columns= column_names)
 		df.to_excel(os.path.join(data_dir, f"jury_votes_{year}.xlsx"), index= False)
-		print(f"Saved data/jury_votes_{year}.xlsx")
+		print(f"Saved data/raw/jury_votes_{year}.xlsx")
 	else:
 		print(f"No jury data found for {year}.")
