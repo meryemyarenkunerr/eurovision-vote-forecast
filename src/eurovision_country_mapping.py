@@ -7,16 +7,17 @@ mappings_dir = base_dir / "data" / "mappings"
 iso_file = mappings_dir / "iso_country_codes.xlsx"
 output_file = mappings_dir / "eurovision_country_check.xlsx"
 
-# Eurovision 2018 country list
+# Eurovision 2016-2025 country list
 eurovision_countries = [
-	"Ukraine", "Azerbaijan", "Belarus", "San Marino", "Netherlands",
-	"Macedonia", "Malta", "Georgia", "Spain", "Austria", "Denmark",
-	"United Kingdom", "Sweden", "Latvia", "Albania", "Croatia", "Ireland",
-	"Romania", "Czech Republic", "Iceland", "Moldova", "Belgium",
-	"Norway", "France", "Italy", "Australia", "Estonia", "Serbia",
-	"Cyprus", "Armenia", "Bulgaria", "Greece", "Hungary", "Montenegro",
-	"Germany", "Finland", "Russia", "Switzerland", "Israel", "Poland",
-	"Lithuania", "Slovenia", "Portugal"
+	"Albania", "Armenia", "Australia", "Austria", "Azerbaijan",
+	"Belarus", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia",
+	"Czech Republic", "Denmark", "Estonia", "Finland", "France",
+	"Georgia", "Germany", "Greece", "Hungary", "Iceland", "Ireland",
+	"Israel", "Italy", "Latvia", "Lithuania", "Luxembourg", "Macedonia",
+	"Malta", "Moldova", "Montenegro", "Netherlands", "North Macedonia",
+	"Norway", "Poland", "Portugal", "Romania", "Russia", "San Marino",
+	"Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland",
+	"Ukraine", "United Kingdom"
 ]
 
 # malual alias
@@ -57,4 +58,4 @@ result = merged[[
 ]]
 
 result.to_excel(output_file, index= False)
-print(f"Eurovision 2018 country mapping check saved to {output_file}")
+print(f"Eurovision country mapping check saved to {output_file}")
