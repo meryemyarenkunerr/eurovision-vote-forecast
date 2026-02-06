@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eurojury"
+version = "0.1.0"
+description = "Eurovision jury data utilities (load, validate, export)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=1.5,<3",
+  "numpy>=1.23,<3",
+  "openpyxl>=3.1",
+
+  "scikit-learn>=1.2,<2",
+  "lightgbm>=4.0",
+
+  "requests>=2.28",
+  "beautifulsoup4>=4.12",
+
+  "matplotlib>=3.7",
+  "seaborn>=0.12"
+]
+
+# Tell setuptools where your packages live (under src/)
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
