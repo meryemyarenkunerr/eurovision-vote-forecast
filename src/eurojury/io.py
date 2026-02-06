@@ -33,16 +33,35 @@ def load_one_year_file(path: Path) -> pd.DataFrame:
 
 	return df
 
-def export(df: pd.DataFrame, fmt: str = "csv",
-		   out: str = processed_dataset_dir) -> None:
-	p = Path(out)
-	p.parent.mkdir(parents= True, exist_ok= True)
+def export(df: pd.DataFrame, fmt: str = "csv") -> None:
+	"""
+	Export the dataset to data/processed/ in the given format.
+	Supported format:
+	 - csv
+	 - parquet
+	 - xlsx
+	"""
+	fmt = fmt.lower()
+	processed_dataset_dir.mkdir(parents= True, exist_ok= True)
+
 	if fmt == "csv":
-		df.to_csv(p, index= False)
+		df.to_csv(
+			processed_dataset_dir / "jury_votes_master.csv",
+			index= False
+		)
+
 	elif fmt == "parquet":
-		df.to_parquet(p, index= False)
-	elif fmt in ("xlsx", "excel"):
-		with pd.ExcelWriter(p, engine= "openpyxl") as xw:
-			df.to_excel(xw, sheet_name= "votes", index= False)
+		df.to_parquet(
+			processed_dataset_dir / "jury_votes_master.parquet",
+			index= False
+		)
+
+	elif fmt in ("excel", "xlsx"):
+		df.to_excel(
+			processed_dataset_dir / "jury_votes_master.xlsx",
+			sheet_name= "votes",
+			index= False
+		)
+
 	else:
-		raise ValueError(f"Unsupported export fmt: {fmt}")
+		raise ValueError(f"fmt must be one of: csv, parquet, xlsx")
