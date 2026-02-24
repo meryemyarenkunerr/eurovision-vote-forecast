@@ -17,20 +17,20 @@ def validate_group(g: pd.DataFrame) -> list[str]:
 			g.loc[bad, "jury_points"].unique()
 			)}")
 
-	# 3) exactly 10 non-zero points
-	nz = g[g["jury_points"] > 0]["jury_points"]
-	if len(nz) != 10:
-		errs.append(f"non-zero points = {len(nz)} (expected 10)")
+	# 3-5) compute non-zero points once
+	nz_values = g.loc[g["jury_points"] > 0, "jury_points"]
+	nz_count = len(nz_values)
+	nz_set = set(nz_values)
+	nz_sum = nz_values.sum()
 
-	# 4) distinct set
-	if set(nz) != REQUIRED_SET:
-			errs.append(f"set = {sorted(
-				set(nz)
-				)} (expected {sorted(REQUIRED_SET)})")
+	if nz_count != 10:
+		errs.append(f"non-zero points = {nz_count} (expected 10)")
 
-	# 5) sum = 58
-	if nz.sum() != 58:
-		errs.append(f"sum = {nz.sum()} (expected 58)")
+	if nz_set != REQUIRED_SET:
+		errs.append(f"set = {sorted(nz_set)} (expected {sorted(REQUIRED_SET)})")
+
+	if nz_sum != 58:
+		errs.append(f"sum = {nz_sum} (expected 58)")
 
 	# 6) uniqueness
 	dups = g.duplicated(["year", "jury_iso", "performer_iso"]).sum()
