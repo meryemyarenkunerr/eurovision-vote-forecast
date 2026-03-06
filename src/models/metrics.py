@@ -104,7 +104,7 @@ def mean_spearman(df: pd.DataFrame,
 	"""
 	rhos = []
 	for _, group in df.groupby(list(group_cols)):
-		if len(group) < 2:
+		if len(group) < 2 or group[score_col].nunique() < 2:
 			continue
 		rho, _ = spearmanr(group[label_col].values,
 					 group[score_col].values)
